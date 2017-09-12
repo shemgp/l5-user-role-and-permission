@@ -1,0 +1,8 @@
+/vendor
+/skeleton
+/build
+error_log
+composer.lock
+/node_modules
+phpunit.xml.dist
+/tests
