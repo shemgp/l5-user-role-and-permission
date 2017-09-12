@@ -14,6 +14,8 @@ class ActionBasedPermissions
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
+
+        $this->alias = config('user-role-and-permission.alias');
     }
 
     /**
@@ -41,6 +43,7 @@ class ActionBasedPermissions
         $name = $action === 'store' ? str_replace('store', 'create', $name) : $name;
         $name = $action === 'show' ? str_replace('show', 'index', $name) : $name;
         $name = $action === 'update' ? str_replace('update', 'edit', $name) : $name;
+        $name = str_replace($this->alias, '', $name); 
 
         if(!in_array($action, $rMethods) || !$this->auth->user()->can($name)) {
             if($request->ajax() || $request->wantsJson()) {
@@ -57,6 +60,7 @@ class ActionBasedPermissions
                         'edit' => 'Actualizar registros',
                         'destroy' => 'Eliminar registros',
                     ];
+                    $resourceName = explode('.', $name)[0];
                     $action = array_key_exists($action, $description) ? $description[$action] : '';
                     $message = 'No tenés privilegios para realizar esa acción: '.$action.' de '.$resourceName;
                 }
