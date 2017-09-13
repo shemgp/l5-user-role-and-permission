@@ -35,7 +35,7 @@ class UserRequest extends ActionBasedFormRequest
 
     public static function update()
     {
-        $repository = new UserRoleAndPermissionRepository();
+        $repository = new UserRepository();
         $user = $repository->findBy(
             $repository->model->getRouteKeyName(),
             request()->route(
