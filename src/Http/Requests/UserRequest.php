@@ -25,7 +25,12 @@ class UserRequest extends ActionBasedFormRequest
         return [
             'fax' => 'nullable|max:25',
             'city' => 'nullable|max:50',
-            'cuit' => 'nullable|numeric|digits:11',
+            'cuit' => [
+                'sometimes',
+                'numeric',
+                'digits:11',
+                Rule::unique(config('user-role-and-permission.table_name') ?: 'users')
+            ],
             'town' => 'nullable|max:50',
             'email' => [
                 'required',
@@ -70,7 +75,17 @@ class UserRequest extends ActionBasedFormRequest
         $id = !is_null($user) ? $user->id : null;
 
         $storeRules = static::store();
-        $updateRules = array_set($storeRules, 'slug',
+
+        $updateRules = array_set($storeRoles, 'cuit',
+            [
+                'sometimes',
+                'numeric',
+                'digits:11',
+                Rule::unique(config('user-role-and-permission.table_name') ?: 'users')->ignore($id)
+            ]
+        );
+
+        $updateRules = array_set($updateRules, 'slug',
             [
                 'sometimes',
                 Rule::unique(config('user-role-and-permission.table_name') ?: 'users')->ignore($id)
