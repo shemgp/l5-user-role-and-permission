@@ -69,7 +69,7 @@ class UserRequest extends ActionBasedFormRequest
         $user = $repository->findBy(
             $repository->model->getRouteKeyName(),
             request()->route(
-                str_singular(config('user-role-permission.resource_name') ?: 'users')
+                str_singular(config('user-role-and-permission.resource_name') ?: 'users')
             )
         );
         $id = !is_null($user) ? $user->id : null;
