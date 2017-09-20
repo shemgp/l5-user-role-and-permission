@@ -61,7 +61,7 @@ class User extends Authenticatable
         'position',
         'state_id',
         'zip_code',
-        'activated',
+        'confirmed',
         'last_name',
         'status_id',
         'country_id',
@@ -69,6 +69,7 @@ class User extends Authenticatable
         'home_address',
         'legal_address',
         'remember_token', 
+        'activation_code',
         'document_number',
         'document_type_id',
     ];

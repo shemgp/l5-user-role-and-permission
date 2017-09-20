@@ -39,6 +39,8 @@ class AddExtraFieldsToUsersTable extends Migration
             $table->string('twitter', 100)->nullable()->after('website');
             $table->string('facebook', 100)->nullable()->after('twitter');
             $table->text('comment')->nullable()->after('facebook');
+            $table->string('activation_code', 30)->nullable();
+            $table->boolean('confirmed')->nullable()->default(0)->after('comment');
             $table->softDeletes();
         });
     }
