@@ -61,7 +61,9 @@ class UserFilters extends QueryFilters
 
     public function full_name($query)
     {
-        return $this->builder->where(\DB::raw('CONCAT(first_name," ",last_name)'), 'LIKE', '%'.$query.'%');
+        return $this->builder->where(\DB::raw('CONCAT(first_name," ",last_name)'), 'LIKE', '%'.$query.'%')
+                             ->orWhere(\DB::raw('CONCAT(last_name," ",first_name)'), 'LIKE', '%'.$query.'%')
+                             ->orWhere(\DB::raw('CONCAT(last_name,", ",first_name)'), 'LIKE', '%'.$query.'%');
     }
 
     public function country_id($query)

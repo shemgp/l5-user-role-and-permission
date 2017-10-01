@@ -4,7 +4,7 @@
       <div class="Cuerpo-Panel">
         <h3><small>Orden de resultados</small></h3>
         @foreach($appliedSorters as $k => $v)
-          <span class="Medalla Medalla-Primario">{{ $v }}</span> <span class="Medalla Medalla-Default">{{ $order }}</span>
+          <span class="Medalla Medalla-Primario">{{ $v }}</span>
         @endforeach
         <div class="Grupo-Formulario {{ $errors->has('orderBy') ? 'El--con-error' : '' }}">
           {!! Form::label('orderBy', 'Ordenar por') !!}
@@ -39,21 +39,30 @@
         @foreach($appliedFilters as $k => $v)
           <span class="Medalla Medalla-Primario">{{ $v }}</span>
         @endforeach
-        <div class="Grupo-Formulario {{ $errors->has('company') ? 'El--con-error' : '' }}">
-          {!! Form::label('company', 'Empresa') !!}
-          {!! Form::text('company', null, ['placeholder' => 'Búsq. similares']) !!}
-          @if($errors->has('company'))
-          <span class="Mensaje-Validacion">
-            <strong>{{ $errors->first('company') }}</strong>
-          </span>
-          @endif
-        </div>
         <div class="Grupo-Formulario {{ $errors->has('cuit') ? 'El--con-error' : '' }}">
           {!! Form::label('cuit', 'CUIT') !!}
           {!! Form::text('cuit', null, ['placeholder' => 'Búsqueda exacta']) !!}
           @if($errors->has('cuit'))
           <span class="Mensaje-Validacion">
             <strong>{{ $errors->first('cuit') }}</strong>
+          </span>
+          @endif
+        </div>
+        <div class="Grupo-Formulario {{ $errors->has('full_name') ? 'El--con-error' : '' }}">
+          {!! Form::label('full_name', 'Nombre completo') !!}
+          {!! Form::text('full_name', null, ['placeholder' => 'Búsq. similares']) !!}
+          @if($errors->has('full_name'))
+          <span class="Mensaje-Validacion">
+            <strong>{{ $errors->first('full_name') }}</strong>
+          </span>
+          @endif
+        </div>
+        <div class="Grupo-Formulario {{ $errors->has('email') ? 'El--con-error' : '' }}">
+          {!! Form::label('email', 'Email') !!}
+          {!! Form::text('email', null, ['placeholder' => 'Búsqueda exacta']) !!}
+          @if($errors->has('email'))
+          <span class="Mensaje-Validacion">
+            <strong>{{ $errors->first('email') }}</strong>
           </span>
           @endif
         </div>
