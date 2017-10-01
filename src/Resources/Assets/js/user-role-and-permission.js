@@ -5,13 +5,7 @@ window.jQuery = jQuery;
 window.$ = window.jQuery;
 window.select2 = select2;
 
-if (typeof window.resourceName === undefined) {
-    window.resourceName = 'customers';
-}
-
 $(() => {
-    let resourceName = window.resourceName;
-
     //$.fn.select2.defaults.set("ajax--delay", 50);
     //$.fn.select2.defaults.set("ajax--cache", false);
     //$.fn.select2.defaults.set("ajax--dataType", 'json');

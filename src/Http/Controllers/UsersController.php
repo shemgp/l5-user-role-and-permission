@@ -16,6 +16,10 @@ class UsersController extends ResourceController
 {
     public function __construct()
     {
+        $this->alias = config('user-role-and-permission.alias');
+
+        $this->prefix = config('user-role-and-permission.prefix');
+
         $this->module = config('user-role-and-permission.module');
 
         $this->repository = config('user-role-and-permission.repository') ?: UserRepository::class;
@@ -41,14 +45,15 @@ class UsersController extends ResourceController
         $items = $this->repository->filter()->sorter()->paginate();
 
         if ($request->wantsJson()) {
-            return response()->json($items->toJson(), 200, [], JSON_PRETTY_PRINT);
-        } else {
-            $view = $this->getViewLocation(__FUNCTION__);
-            if (!View::exists($view)) {
-                return $this->redirectBackWithViewMissingMessage($view);
-            } else {
-                return response()->view($view, compact('items'), 200);
-            }
+            return response()->json($items, 200, [], JSON_PRETTY_PRINT);
         }
+
+
+        $view = $this->getViewLocation(__FUNCTION__);
+        if (!View::exists($view)) {
+            return $this->redirectBackWithViewMissingMessage($view);
+        }
+
+        return response()->view($view, compact('items'), 200);
     }
 }
